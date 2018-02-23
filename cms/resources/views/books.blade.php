@@ -17,7 +17,7 @@
             <div class="form-group">
                 
                 <div class="col-sm-6">
-                    <label for="book" class="col-sm-3 control-label">Book</label>
+                    <label for="book" class="col-sm-3 control-label">本の名前</label>
                     <input type="text" name="item_name" id="book-name" class="form-control">
                 </div>
                 
