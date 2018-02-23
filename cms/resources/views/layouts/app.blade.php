@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- cssの呼び出し -->
+<link href="css/test.css" rel="stylesheet" type="text/css">
+<!-- jsファイルの呼び出し -->
+<script type="text/javascript" src="js/test.js"></script>
+
     <head>
         <title>Book List</title>
 

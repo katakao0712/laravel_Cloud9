@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 //Eloquent モデル 「/app/Book.php」 を 参照 できるようにするため。
 
 Route::get('/', function () {
+
    $books = Book::orderBy('created_at', 'asc')->get();
    return view('books', [
        'books' => $books 
@@ -41,7 +42,7 @@ Route::post('/books', function(Request $request){
             ->withInput()
             ->withErrors($validator);
     }
-    
+
     //Eloquentモデル
     $books = new Book; 
     $books->item_name = $request->item_name;
@@ -49,11 +50,13 @@ Route::post('/books', function(Request $request){
     $books->item_amount = $request->item_amount;
     $books->published = $request->published;
     $books->save();// 「/」 ルートにリダイレクト
+    Session::flash('flash_message', '記事の作成に成功しました');
     return redirect('/');
 });
 
 Route::delete('/book/{book}', function(Book $book){
     $book->delete();
+    \Session::flash('flash_message', '記事を削除しました。'); 
     return redirect('/');
 });
 

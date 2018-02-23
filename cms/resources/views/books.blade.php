@@ -4,6 +4,9 @@
 
     <!-- Bootstrapの定形コード… -->
     <div class="panel-body">
+        @if (Session::has('flash_message'))
+            <div class="alert alert-success">{{ Session::get('flash_message') }}</div>
+        @endif
         <!-- バリデーションエラーの表示 -->
         @include('common.errors')
         <!-- バリデーションエラーの表示 -->
@@ -18,17 +21,16 @@
                 
                 <div class="col-sm-6">
                     <label for="book" class="col-sm-3 control-label">本の名前</label>
-                    <input type="text" name="item_name" id="book-name" class="form-control">
-                </div>
+                    <input type="text" name="item_name" id="book-name" class="form-control" value="吾輩は猫である">
                 
                 <div class="col-sm-6">
                     <label for="amount" class="col-sm-3 control-label">金額</label>
-                    <input type="text" name="item_amount" id="book-amount" class="form-control">
+                    <input type="text" name="item_amount" id="book-amount" class="form-control" value="500">
                 </div>
                 
                 <div class="col-sm-6">
                     <label for="number" class="col-sm-3 control-label">数</label>
-                    <input type="text" name="item_number" id="book-number" class="form-control">
+                    <input type="text" name="item_number" id="book-number" class="form-control" value="1">
                 </div>
                 
                   <div class="col-sm-6">
@@ -54,7 +56,7 @@
     @if (count($books) > 0)
         <div class="panel panel-default">
             <div class="panel-heading">
-                現在の本
+                本
             </div>
 
             <div class="panel-body">
@@ -62,8 +64,9 @@
 
                     <!-- テーブルヘッダ -->
                     <thead>
-                        <th>本一覧</th>
-                        <th>&nbsp;</th>
+                        <th>名前</th>
+                        <th>金額</th>
+                        <th>冊数</th>
                     </thead>
 
                     <!-- テーブル本体 -->
@@ -74,6 +77,12 @@
                                 <!-- 本タイトル -->
                                 <td class="table-text">
                                     <div>{{ $book->item_name }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $book->item_amount }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $book->item_number }}</div>
                                 </td>
                                 
                                 <!-- 本: 更新ボタン -->
