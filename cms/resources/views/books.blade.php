@@ -117,6 +117,10 @@
     <!-- Book: 既に登録されてる本のリスト -->
     
         </div>
+        
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4"> {{$books->links()}} </div>
+        </div>
     <!-- 本登録フォームの作成 -->
 
 @endsection

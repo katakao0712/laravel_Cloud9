@@ -7,7 +7,13 @@ use Validator;
 
 class BooksController extends Controller
 {
-    //
+    
+        public function __construct(){
+        $this->middleware('auth');
+        //「認 証 していたら 表示 する」 という 処 理 です。 
+        //ログイン 認 証 してなければ 非 表示 になります。 
+        }
+    
         public function update (Request $request){
            $validator = Validator::make($request->all(), [
            'id' => 'required',
@@ -60,7 +66,7 @@ class BooksController extends Controller
         }
         
         public function index(){
-            $books = Book::orderBy('created_at', 'asc')->get();
+            $books = Book::orderBy('created_at', 'asc')->paginate(3);
             return view('books', [
                'books' => $books 
             ]);
