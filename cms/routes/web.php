@@ -23,3 +23,6 @@ Route::get('/','BooksController@index');
 Route::delete('/book/{book}','BooksController@delete');
 Route::post('/booksedit/{books}','BooksController@edit');
 
+
+Auth::routes();
+Route::get('/home', 'BooksController@index')->name('home');
