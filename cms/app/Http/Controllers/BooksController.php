@@ -31,7 +31,7 @@ class BooksController extends Controller
            }
            
            //データ 更新
-           $books = Book::find($request->id);
+           $books = Book::where('user_id',Auth::user()->id)->find($request->id);
            $books->item_name = $request->item_name;
            $books->item_number = $request->item_number;
            $books->item_amount = $request->item_amount;
@@ -55,7 +55,8 @@ class BooksController extends Controller
                             ->withErrors($validator);
                 }
             //Eloquentモデル
-            $books = new Book; 
+            $books = new Book;
+            $books->user_id = Auth::user()->id;
             $books->item_name = $request->item_name;
             $books->item_number = $request->item_number;
             $books->item_amount = $request->item_amount;
@@ -66,13 +67,16 @@ class BooksController extends Controller
         }
         
         public function index(){
-            $books = Book::orderBy('created_at', 'asc')->paginate(3);
+            $books = Book::where('user_id', Auth::user()->id)
+            ->orderBy('created_at','desc')
+            ->paginate(3);
             return view('books', [
                'books' => $books 
             ]);
         }
         
-        public function edit(Book $books){
+        public function edit($book_id){
+            $books = Book::where('use_id' , Anth::user()->id)->find($book_id);
             //{books}id 値 を 取得 => Book $books id 値 の１レコード 取得
             return view('booksedit', ['book' => $books]);
         }
